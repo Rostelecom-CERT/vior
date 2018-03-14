@@ -1,0 +1,31 @@
+language: go
+
+go:
+  - 1.5
+  - 1.10
+  - master
+
+script:
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken=$COVERALLS_TOKEN
+
+before_deploy:
+  - cd cmd/vior-http
+  - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -a -installsuffix cgo -o vior-${TRAVIS_TAG}-amd64
+  - CGO_ENABLED=0 GOOS=linux GOARCH=386 go build -ldflags="-s -w" -a -installsuffix cgo -o vior-${TRAVIS_TAG}-386
+  - CGO_ENABLED=0 GOOS=darwin go build -ldflags="-s -w" -a -installsuffix cgo -o vior-${TRAVIS_TAG}-mac
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true
+  file:
+    - vior-${TRAVIS_TAG}-amd64
+    - vior-${TRAVIS_TAG}-386
+    - vior-${TRAVIS_TAG}-mac
+  on:
+    repo: Rostelecom-CERT/vior
+    tags: true
+    condition: $TRAVIS_GO_VERSION = 1.10
