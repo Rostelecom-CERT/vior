@@ -48,8 +48,10 @@ func (e *ElasticStorage) Init() error {
 	e.Client = ec
 
 	_, err = e.Client.CreateIndex(e.IdxName).Do(e.Ctx)
-	if !strings.Contains(err.Error(), "already_exists_exception") != nil {
-		return err
+	if err != nil {
+		if !strings.Contains(err.Error(), "already_exists_exception") {
+			return err
+		}
 	}
 
 	go func() {
