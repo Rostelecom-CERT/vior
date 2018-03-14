@@ -71,8 +71,9 @@ type Report struct {
 // ExtReport is an extended Report with additional metadata
 type ExtReport struct {
 	Report
-	Date     time.Time `json:"date"`
-	RemoteIP net.IP    `json:"remote-ip"`
+	Date      time.Time `json:"date"`
+	RemoteIP  net.IP    `json:"remote-ip"`
+	UserAgent string    `json:"useragent"`
 }
 
 // ReportReceive handles fasthttp server requests
@@ -83,7 +84,7 @@ func (conf *Config) ReportReceive(ctx *fasthttp.RequestCtx) {
 		if err := json.Unmarshal(ctx.PostBody(), &req); err != nil {
 			ctx.Error(err.Error(), fasthttp.StatusBadRequest)
 		} else {
-			rep := ExtReport{req.Report, time.Now().UTC(), ctx.RemoteIP()}
+			rep := ExtReport{req.Report, time.Now().UTC(), ctx.RemoteIP(), string(ctx.UserAgent())}
 			conf.Storage.GetPipe() <- &rep
 
 			ctx.SetStatusCode(fasthttp.StatusOK)
