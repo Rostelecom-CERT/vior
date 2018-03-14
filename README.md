@@ -7,6 +7,16 @@ Currently it uses Elasticsearch as a storage, but other dbs could be easily impl
 
 # How to start
 
+## Docker
+
+```
+sudo docker-compose up -d
+```
+
+Do not forget to specify volume for the Elasticsearch data if you want to persist the data.
+
+## Development version
+
 Listen on `:8080` and use `127.0.0.1:9200` as the Elastic server storage
 
 ```
