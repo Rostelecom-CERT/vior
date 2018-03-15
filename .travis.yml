@@ -1,8 +1,8 @@
 language: go
 
 go:
-  - 1.5
-  - 1.10
+  - "1.5"
+  - "1.10"
   - master
 
 script:
@@ -28,4 +28,4 @@ deploy:
   on:
     repo: Rostelecom-CERT/vior
     tags: true
-    condition: $TRAVIS_GO_VERSION = 1.10
+    condition: $TRAVIS_GO_VERSION = "1.10"
