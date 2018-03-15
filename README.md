@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Rostelecom-CERT/vior.svg?branch=master)](https://travis-ci.org/Rostelecom-CERT/vior) [![](https://godoc.org/github.com/Rostelecom-CERT/vior?status.svg)](http://godoc.org/github.com/Rostelecom-CERT/vior)
+
 Violations Receiver
 -------------------
 
