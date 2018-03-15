@@ -6,10 +6,8 @@ go:
   - master
 
 script:
-  - go get golang.org/x/tools/cmd/cover
-  - go get github.com/mattn/goveralls
-  - go test -v -covermode=count -coverprofile=coverage.out
-  - goveralls -coverprofile=coverage.out -service=travis-ci -repotoken=$COVERALLS_TOKEN
+  - go build
+  - go build cmd/vior-http/main.go
 
 before_deploy:
   - cd cmd/vior-http
