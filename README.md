@@ -3,9 +3,9 @@
 Violations Receiver
 -------------------
 
-Content Security Policy **vio**lations **r**eceiver
+Content Security Policy **vio**lations **r**eceiver.
 
-Currently it uses Elasticsearch as a storage, but other dbs could be easily implemented
+Currently it uses Elasticsearch as a storage, but other dbs could be easily implemented.
 
 # How to start
 
@@ -19,7 +19,9 @@ Do not forget to specify volume for the Elasticsearch data if you want to persis
 
 ## Development version
 
-Listen on `:8080` and use `127.0.0.1:9200` as the Elastic server storage
+Only Go 1.9+ is supported.
+
+Listen on `:8080` and use `127.0.0.1:9200` as the Elastic server storage.
 
 ```
 $: VIOR_PORT=8080 \
